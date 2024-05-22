@@ -38,6 +38,8 @@ public class TodoController {
         return ResponseEntity.ok().body(response);
     }
 
+    // 일정의 전체 목록을 조회하는 api.
+    // List를 사용하여 저장되어있는 정보를 컬렉션으로 불러오고 stream 으로 mapping 한다.
     @GetMapping
     public ResponseEntity<List<TodoResponseDto>> getTodos() {
         List<Todo> todos = todoservice.getTodos();
@@ -46,4 +48,6 @@ public class TodoController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok().body(response);
     }
+
+
 }

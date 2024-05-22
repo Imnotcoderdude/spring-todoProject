@@ -4,6 +4,7 @@ import io.me.springtodo.dto.TodoRequestDto;
 import io.me.springtodo.repository.Todo;
 import io.me.springtodo.repository.TodoRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +27,8 @@ public class Todoservice {
     }
 
     // 할일 전체 조회
+    // 오름차순 정렬을 하기 위해 findAll 에서 Sort.by 정렬을 사용하고 createdAt 을 기준 삼아 descending 으로 오름차순 정렬 실행
     public List<Todo> getTodos() {
-        return todoRepository.findAll();
+        return todoRepository.findAll(Sort.by(("createdAt")).descending());
     }
 }
