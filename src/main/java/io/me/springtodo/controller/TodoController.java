@@ -4,7 +4,6 @@ import io.me.springtodo.CommonResponse;
 import io.me.springtodo.dto.TodoRequestDto;
 import io.me.springtodo.dto.TodoResponseDto;
 import io.me.springtodo.repository.Todo;
-import io.me.springtodo.repository.TodoRepository;
 import io.me.springtodo.service.Todoservice;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -4,7 +4,6 @@ import io.me.springtodo.dto.TodoRequestDto;
 import io.me.springtodo.repository.Todo;
 import io.me.springtodo.repository.TodoRepository;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
