@@ -6,6 +6,8 @@ import io.me.springtodo.repository.TodoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class Todoservice {
@@ -21,5 +23,10 @@ public class Todoservice {
     public Todo getTodo(Long todoId) {
         return todoRepository.findById(todoId)
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    // 할일 전체 조회
+    public List<Todo> getTodos() {
+        return todoRepository.findAll();
     }
 }
