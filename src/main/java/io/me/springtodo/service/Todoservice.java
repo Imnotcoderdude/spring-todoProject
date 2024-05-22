@@ -36,17 +36,29 @@ public class Todoservice {
 
     // 할일 수정
     public Todo updateTodo(Long todoId, TodoRequestDto dto) {
-        Todo todo = getTodo(todoId);
-
-        //todo 조회를 했을때 비밀번호 체크하는 조건문
-        if (todo.getPassword() != null && !Objects.equals(todo.getPassword(), dto.getPassword())) {
-            throw new IllegalArgumentException("비밀번호가 맞지 않습니다.");
-        }
+        Todo todo = checkPWAndGetTodo(todoId, dto.getPassword());
 
         todo.setTitle(dto.getTitle());
         todo.setContent(dto.getContent());
         todo.setUserName(dto.getUserName());
         return todoRepository.save(todo);
 
+    }
+
+    private Todo checkPWAndGetTodo(Long todoId, String password) {
+        Todo todo = getTodo(todoId);
+
+        //todo 조회를 했을때 비밀번호 체크하는 조건문
+        if (todo.getPassword() != null && !Objects.equals(todo.getPassword(), password)) {
+            throw new IllegalArgumentException("비밀번호가 맞지 않습니다.");
+        }
+        return todo;
+    }
+
+    // 지정된 일정을 삭제하는 기능
+    public void deleteTodo(Long todoId, String password) {
+        Todo todo = checkPWAndGetTodo(todoId, password);
+
+        todoRepository.delete(todo);
     }
 }
