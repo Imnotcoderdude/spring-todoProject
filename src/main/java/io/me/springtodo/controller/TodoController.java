@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,5 +48,13 @@ public class TodoController {
         return ResponseEntity.ok().body(response);
     }
 
+    // 일정을 수정하는 api.
+    //
+    @PutMapping("/{todoId}")
+    public ResponseEntity<TodoResponseDto> putTodo(@PathVariable Long todoId, @RequestBody TodoRequestDto dto) {
+        Todo todo = todoservice.updateTodo(todoId, dto);
+        TodoResponseDto response = new TodoResponseDto(todo);
+        return ResponseEntity.ok().body(new TodoResponseDto(todo));
+    }
 
 }
