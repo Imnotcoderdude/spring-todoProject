@@ -1,10 +1,14 @@
 package io.me.springtodo.controller;
 
 import io.me.springtodo.CommonResponse;
+import io.me.springtodo.dto.CommentRequestDto;
+import io.me.springtodo.dto.CommentResponseDto;
 import io.me.springtodo.dto.TodoRequestDto;
 import io.me.springtodo.dto.TodoResponseDto;
+import io.me.springtodo.entity.Comment;
 import io.me.springtodo.repository.Todo;
-import io.me.springtodo.service.Todoservice;
+import io.me.springtodo.service.CommentService;
+import io.me.springtodo.service.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +21,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @RequestMapping("/api/todo")
 public class TodoController {
-    public final Todoservice todoservice;
+    public final TodoService todoservice;
+    private final CommentService commentService;
 
     // 아무것도 없는 상태이더라도 postman 에서 호출을 하게 된다면 200 코드가 나오면서 정상호출이 되었음을 알린다.
     // 일정을 입력받고 저장하는 Post 형태의 api 생성
@@ -31,7 +36,7 @@ public class TodoController {
                         .statusCode(HttpStatus.OK.value())
                         .message("생성이 완료 되었습니다.")
                         .data(response)
-                    .build());
+                        .build());
     }
 
     // todoId 를 사용하여 원하는 일정의 id를 입력하여 단건 조회 기능을 하는 api 생성
@@ -87,6 +92,21 @@ public class TodoController {
                         .statusCode(HttpStatus.OK.value())
                         .message("삭제가 완료 되었습니다.")
                         .build());
+    }
+
+    // 일정에 댓글을 추가하는 api
+    @PostMapping("/{todoId}/comments")
+    public ResponseEntity<CommonResponse<CommentResponseDto>> addComment(@PathVariable Long todoId, @RequestBody CommentRequestDto dto) {
+        // 원하는 일정에 새로운 댓글을 추가하고 추가된 댓글을 반환하는 코드
+        Comment comment = commentService.addComment(todoId,dto);
+        // 추가된 댓글 정보를 ResponseDto 에 담아서 클라이언트에 반환함
+        CommentResponseDto responseDto = new CommentResponseDto(comment);
+        return ResponseEntity.ok().body(CommonResponse.<CommentResponseDto>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message("댓글이 성공적으로 추가되었습니다!")
+                .data(responseDto)
+                .build());
+
     }
 
 }

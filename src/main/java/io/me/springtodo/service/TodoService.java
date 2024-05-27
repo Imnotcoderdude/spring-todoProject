@@ -4,15 +4,18 @@ import io.me.springtodo.dto.TodoRequestDto;
 import io.me.springtodo.repository.Todo;
 import io.me.springtodo.repository.TodoRepository;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+
 @Service
 @AllArgsConstructor
-public class Todoservice {
+public class TodoService {
     private final TodoRepository todoRepository;
 
     // 할일을 생성하는 메서드
