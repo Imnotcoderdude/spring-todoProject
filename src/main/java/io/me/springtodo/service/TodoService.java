@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @Getter
@@ -62,5 +63,12 @@ public class TodoService {
         Todo todo = checkPWAndGetTodo(todoId, password);
 
         todoRepository.delete(todo);
+    }
+
+    public Todo getTodobyId(Long todoId) {
+        return todoRepository
+                .findById(todoId)
+                .orElseThrow(() ->
+                        new NoSuchElementException("선택하신 일정을 찾을 수 없습니다." + todoId));
     }
 }

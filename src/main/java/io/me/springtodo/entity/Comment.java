@@ -2,14 +2,14 @@ package io.me.springtodo.entity;
 
 import io.me.springtodo.repository.Todo;
 import jakarta.persistence.*;
-import lombok.Generated;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-
+@Builder
 @Setter
 @Getter
 @Entity

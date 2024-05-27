@@ -18,7 +18,7 @@ public class CommentService {
         // 입력받은 todoId 를 이용해서 해당하는 일정을 가져온다.
         Todo todo = todoService.getTodobyId(todoId);
         // 요청된 Dto 로 부터 댓글 entity 생성
-        Comment comment = requestDto.toEntity();
+        Comment comment = commentRequestDto.toEntity();
         // 댓글에 해당하는 일정을 설정한다.
         comment.setTodo(todo);
         // 입력받은 댓글을 저장하고 저장된 댓글을 반환함
