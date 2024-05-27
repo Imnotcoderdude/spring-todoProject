@@ -2,10 +2,7 @@ package io.me.springtodo.entity;
 
 import io.me.springtodo.repository.Todo;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,5 +30,11 @@ public class Comment {
     // TODO [질문사항] : 분명히 Lombok 의 @Getter 어노테이션을 사용해서 @Getter 를 추가했는데도 CommentResponseDto 클래스의 Builder 에서 Getter 를 추가하라고 에러를 내보냄.
     public Long getCommentId() {
         return id;
+    }
+
+    // TODO [질문사항] : TodoEntity 클래스와 다른것이 무엇이길래 commentEntity 클래스는 @prePersist 어노테이션을 달아야 하는가?
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
     }
 }

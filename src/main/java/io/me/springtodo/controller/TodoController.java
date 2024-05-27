@@ -100,7 +100,7 @@ public class TodoController {
         // 원하는 일정에 새로운 댓글을 추가하고 추가된 댓글을 반환하는 코드
         Comment comment = commentService.addComment(todoId,dto);
         // 추가된 댓글 정보를 ResponseDto 에 담아서 클라이언트에 반환함
-        CommentResponseDto responseDto = new CommentResponseDto(comment);
+        CommentResponseDto responseDto = CommentResponseDto.fromEntity(comment);
         return ResponseEntity.ok().body(CommonResponse.<CommentResponseDto>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("댓글이 성공적으로 추가되었습니다!")

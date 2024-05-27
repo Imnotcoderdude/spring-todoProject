@@ -1,11 +1,13 @@
 package io.me.springtodo.dto;
 
 import io.me.springtodo.entity.Comment;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class CommentRequestDto {
     private String comment;
     private String userName;
@@ -18,7 +20,7 @@ public class CommentRequestDto {
 
     public Comment toEntity() {
         return Comment.builder()
-                .comment(comment)
+                .content(comment)
                 .userName(userName)
                 .build();
     }

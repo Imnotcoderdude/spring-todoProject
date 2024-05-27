@@ -16,7 +16,7 @@ public class CommentService {
     //댓글을 추가하는 메서드
     public Comment addComment(Long todoId, CommentRequestDto commentRequestDto) {
         // 입력받은 todoId 를 이용해서 해당하는 일정을 가져온다.
-        Todo todo = todoService.getTodobyId(todoId);
+        Todo todo = todoService.getTodoById(todoId);
         // 요청된 Dto 로 부터 댓글 entity 생성
         Comment comment = commentRequestDto.toEntity();
         // 댓글에 해당하는 일정을 설정한다.

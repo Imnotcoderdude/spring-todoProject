@@ -65,7 +65,9 @@ public class TodoService {
         todoRepository.delete(todo);
     }
 
-    public Todo getTodobyId(Long todoId) {
+    // 일정을 지정하면 todoRepository 에서 findById를 사용해서 지정한 일정을 불러오고
+    // 만약 일정이 존재하지 않다면 오류처리.
+    public Todo getTodoById(Long todoId) {
         return todoRepository
                 .findById(todoId)
                 .orElseThrow(() ->
